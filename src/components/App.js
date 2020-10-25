@@ -7,7 +7,7 @@ class App extends Component {
     this.state = {
       renderBall: false, //variable needed to be changed
       posi: 0,
-      ballPosition: { left: "0" }
+      ballPosition: { left: "40px" }
     };
     this.renderChoice = this.renderChoice.bind(this);
     this.buttonClickHandler = this.buttonClickHandler.bind(this);
@@ -22,18 +22,17 @@ class App extends Component {
 
   handleKeyDown(event) {
     console.log("handleKeyDown");
-    let pos = parseInt(this.state.ballPosition.left);
-    console.log(pos);
-    pos = pos + 5;
-    this.setState({ ballPosition: { left: `${pos}` } });
+    if (!this.state.renderBall) return;
+    let leftPos = this.state.ballPosition.left;
+    let endIndex = leftPos.indexOf("px");
+    leftPos = parseInt(leftPos.slice(0, endIndex));
+    console.log(leftPos);
+    leftPos += 5;
+    this.setState({ ballPosition: { left: `${leftPos}px` } });
   }
   renderChoice() {
     if (this.state.renderBall) {
-      return (
-        <div className="ball" style={this.state.ballPosition}>
-          Ball
-        </div>
-      );
+      return <div className="ball" style={this.state.ballPosition}></div>;
     } else
       return (
         <button onClick={this.buttonClickHandler}>Click For One Ball</button>
