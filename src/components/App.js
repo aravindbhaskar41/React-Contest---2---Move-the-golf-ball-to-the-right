@@ -21,14 +21,16 @@ class App extends Component {
   }
 
   handleKeyDown(event) {
-    console.log("handleKeyDown");
+    console.log(event.key);
     if (!this.state.renderBall) return;
-    let leftPos = this.state.ballPosition.left;
-    let endIndex = leftPos.indexOf("px");
-    leftPos = parseInt(leftPos.slice(0, endIndex));
-    console.log(leftPos);
-    leftPos += 5;
-    this.setState({ ballPosition: { left: `${leftPos}px` } });
+    if (event.keyCode == 39) {
+      let leftPos = this.state.ballPosition.left;
+      let endIndex = leftPos.indexOf("px");
+      leftPos = parseInt(leftPos.slice(0, endIndex));
+      console.log(leftPos);
+      leftPos += 5;
+      this.setState({ ballPosition: { left: `${leftPos}px` } });
+    }
   }
   renderChoice() {
     if (this.state.renderBall) {
